@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar pb;
+    CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +22,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mCnt(View view) {
-        new CountDownTimer(10000,100) {
+        Log.v("timerid", String.valueOf(countDownTimer));
+        if (countDownTimer != null) countDownTimer.cancel();
+        countDownTimer = new CountDownTimer(10000, 100) {
             @Override
             public void onTick(long m) {
-                pb.setProgress((int)(m/100));
+                pb.setProgress((int) (m / 100));
                 //Log.v("출력", String.valueOf(m));
             }
 
@@ -34,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 //Log.v("출력끝.","끝");
             }
 
-        }.start();
+        };
 
+        countDownTimer.start();
     }
 
 }
